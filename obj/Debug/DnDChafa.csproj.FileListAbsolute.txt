@@ -1,0 +1,7 @@
+C:\Users\Wande\source\repos\DnDChafa\bin\Debug\DnDChafa.exe.config
+C:\Users\Wande\source\repos\DnDChafa\bin\Debug\DnDChafa.exe
+C:\Users\Wande\source\repos\DnDChafa\bin\Debug\DnDChafa.pdb
+C:\Users\Wande\source\repos\DnDChafa\obj\Debug\DnDChafa.csprojAssemblyReference.cache
+C:\Users\Wande\source\repos\DnDChafa\obj\Debug\DnDChafa.csproj.CoreCompileInputs.cache
+C:\Users\Wande\source\repos\DnDChafa\obj\Debug\DnDChafa.exe
+C:\Users\Wande\source\repos\DnDChafa\obj\Debug\DnDChafa.pdb
