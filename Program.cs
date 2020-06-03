@@ -11,15 +11,25 @@ namespace DnDChafa
         public static Jugador JugadorActual;
         public static bool loopPrincipal = true;
         public static int PartidaNueva;
-        public static Historia Historiador;
+        
         static void Main(string[] args)
         {
              MenuPrincipal();
-            Console.WriteLine(JugadorActual.Pociones);
-            Console.ReadKey();
+
+            if (JugadorActual.Exp == 0){
+                Historia.HistoriaPrincipio(JugadorActual);
+            }
             Loop(loopPrincipal);
             
         }
+        /// <summary>
+        /// Loop donde al usuario se le da 4 opciones diferentes de que quiere hacer
+        /// Hacer un encuentro aleatorio
+        /// Visitar la tienda
+        /// Guardar su partida
+        /// Salir del programa
+        /// </summary>
+        /// <param name="LoopPrincipal">Mientras el bool sea verdadero se le seguiran presentando las 4 opciones al jugador</param>
         static void Loop(bool LoopPrincipal)
         {
             while (loopPrincipal)
@@ -51,6 +61,11 @@ namespace DnDChafa
 
             }
         }
+        /// <summary>
+        /// Da la opcion al jugador de iniciar una partida nueva, con un personaje nuevo 
+        /// o empezar una partida con un personaje guardado en una partida previa
+        /// Se necesita un documento de texto llamado Partida.txt para cargar un personaje
+        /// </summary>
         static void MenuPrincipal()
         {
             
@@ -90,11 +105,13 @@ namespace DnDChafa
             switch (PartidaNueva)
             {
                 case 0:
-                    JugadorActual = new Jugador("", 10, 100, 0, 5, 1, 0);
+                    //Nuevo personaje
+                    JugadorActual = new Jugador("", 10, 100, 0, 5, 1, 0,0);
 
                     break;
                 case 1:
-                    JugadorActual = new Jugador("", 10, 500, 0, 25, 1, 0);
+                    //Cargar personaje
+                    JugadorActual = new Jugador("", 10, 500, 0, 25, 1, 0,1);
                     break;
                 case 2:
                     MenuPrincipal();

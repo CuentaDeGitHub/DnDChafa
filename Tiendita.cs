@@ -9,7 +9,10 @@ namespace DnDChafa
     public class Tiendita
     {
       
-    
+    /// <summary>
+    /// Interfaz que permite al usuario comprar pociones y mejoras para su armadura y arma
+    /// </summary>
+    /// <param name="p">Objeto del personaje, los precios son calculados en base a las mejoras que tengas</param>
         public static void AbrirTienda(Jugador p)
         {
             int pocionPrecio;
@@ -62,6 +65,12 @@ namespace DnDChafa
                 }
             }
         }
+        /// <summary>
+        /// Metodo que intercambia el oro del jugador por un objeto o mejora de la tienda
+        /// </summary>
+        /// <param name="objeto">Objeto a comprar</param>
+        /// <param name="costo">Costo del objeto</param>
+        /// <param name="p">Objeto del jugador, para poder realizar la compra si se tiene el oro necesario, tambien para modificar los stats y objetos del jugador si es que se compra</param>
         static void Comprar(string objeto,int costo,Jugador p)
         {
             if(p.Monedas >= costo)
@@ -86,7 +95,7 @@ namespace DnDChafa
             }
             else
             {
-                Console.WriteLine("Otra vez sin lana");
+                Console.WriteLine("Parece que no tienes dinero suficiente");
                 Console.ReadKey();
                 
             }

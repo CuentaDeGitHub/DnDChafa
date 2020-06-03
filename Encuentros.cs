@@ -10,8 +10,13 @@ namespace DnDChafa
     {
         static Random r = new Random();
       
-        //Encuentros genericos
+        
         //Encuentros
+/// <summary>
+/// El primer encuentro forzado para el jugador, despues de la pelea el jugador sera capaz de usar el 
+/// menu principal
+/// </summary>
+/// <param name="p">El objeto jugador, que incluye su ataque,vida,defensa,pociones,etc</param>
         public static void PrimerEncuentro(Jugador p)
         {
             Console.WriteLine("Abres la fuerza con toda tu fuerza, tomas una espada oxidada del piso y avanzas rapidamente hacia tu captor");
@@ -19,12 +24,17 @@ namespace DnDChafa
             Combate(false, "Dum", 3, 10,p);
             Console.ReadKey();
         }
+        /// <summary>
+        /// Uno de los encuentros especiales, aqui el combate es opcional
+        /// </summary>
+        /// <param name="p">El objeto jugador, que incluye su ataque,vida,defensa,pociones,etc</param>
         public static void peleadorArio(Jugador p)
         {
             Console.Clear();
-            Console.WriteLine("En tus viajes, un pequeño viajero, de color de piel oscura se acerca");
-            Console.WriteLine("-Hey Pleb!");
-            Console.WriteLine("Contestame rapidamente, de que color me vez?");
+            Console.WriteLine("En tus viajes, una pequeña figura de color marron se te acerca");
+            Console.WriteLine("-Hey Pleb - Exclama el pequeño humano");
+            Console.WriteLine("Muchas personas en los demas pueblos no estan reconociendo mis rasgos arios");
+            Console.WriteLine("Tu de que color me ves?");
             Console.WriteLine("(A)rio");
             Console.WriteLine("(P)rieto");
             string c = Console.ReadLine();
@@ -35,13 +45,16 @@ namespace DnDChafa
                 Console.ReadKey();
                 Combate(false, "El Doom", 1, 1,p);
                 Console.WriteLine("Mientras la pequeña bestia cae al piso, con su ultimo aliento dice");
-                Console.WriteLine("mi lineaje ario....");
+                Console.WriteLine("Ahora quien seguira con el lineaje ario....?");
                 Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Porfin alguien que no me miente solo para molestarme");
-                Console.WriteLine("Gracias por tu tiempo.......... marron");
+                Console.WriteLine("Gracias por no mentirme, hay mucha gente que solo quiere molestarme");
+                Console.WriteLine("Puedes quedarte con esto, se que la gente de tu color la pasa duro");
+                Console.WriteLine();
+                Console.WriteLine("Has obtenido una pocion");
+                p.Pociones++;
                 Console.ReadKey();
             }
             
@@ -54,7 +67,10 @@ namespace DnDChafa
             Combate(true,"", 0,0,p);
 
         }
-        //Herramientas de encuentro
+        /// <summary>
+        /// Elige de manera aleatoria un encuentro para el jugador
+        /// </summary>
+        /// <param name="p">El objeto jugador, que incluye su ataque,vida,defensa,pociones,etc</param>
         public static void EncuentroAleatorio(Jugador p)
         {
             switch (r.Next(0, 2))
@@ -72,10 +88,11 @@ namespace DnDChafa
         /// Muestra un Menu donde el jugador puede ver sus estadisticas y sus opciones de combate
         /// Y permite al jugador elegir que accion tomar durante el combate
         /// </summary>
-        /// <param name="random">Utilizado para saber si es un encuentro al azar o predeterminado</param>
+        /// <param name="random">Utilizado para saber si es un encuentro al azar o predeterminado, en caso de que sea falso, los siguientes parametros sin irrelevantes</param>
         /// <param name="nombreEnemigo">Nombre del enemigo en caso de que sea uno predeterminado </param>
         /// <param name="daño">Daño o ataque del enemigo</param>
         /// <param name="vida">Salud del enemigo</param>
+        /// <param name= "p">Objeto del jugador</param>
         public static void Combate(bool random, string nombreEnemigo, int daño, int vida,Jugador p)
         {
             string n;
@@ -200,10 +217,7 @@ namespace DnDChafa
                             p.Vida -= dañoRecibido;
                             Console.ReadKey();
                         }
-
-
                         break;
-
 
                 }
                 if(p.Vida <= 0)
@@ -220,9 +234,14 @@ namespace DnDChafa
             Console.WriteLine("Te madreaste al " + n);
             Console.WriteLine("Obtienes " + oro + " monedas de oro ");
             p.Monedas += oro;
+            p.Exp++;
             Console.ReadKey();
 
         }
+        /// <summary>
+        /// Proporciona un nombre para el enemigo de una lista
+        /// </summary>
+        /// <returns>El nombre del enemigo</returns>
         public static string ObtenerEnemigo()
         {
             switch (r.Next(0, 5))
