@@ -61,6 +61,8 @@ namespace DnDChafa
                     Comprar("modificador", difP, p);
                 }else if(input == "s"|| input == "salir")
                 {
+                    Console.WriteLine("Vuelva pronto!");
+                    Console.ReadKey();
                     return;
                 }
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace DnDChafa
 {
@@ -11,7 +12,9 @@ namespace DnDChafa
         public static Jugador JugadorActual;
         public static bool loopPrincipal = true;
         public static int PartidaNueva;
-        
+        public static string NombreDePartida = @"C:\Users\Wande\Desktop\Partida.txt";
+
+
         static void Main(string[] args)
         {
              MenuPrincipal();
@@ -49,7 +52,20 @@ namespace DnDChafa
                     Tiendita.AbrirTienda(JugadorActual);
                 }else if(input == "g" || input == "guardar")
                 {
+                    //Nombre,Vida,Monedas,Armadura,Pociones,PoderDelArma,Mods,Exp
+                    string Datos = (JugadorActual.Nombre + "," + JugadorActual.Vida + "," + JugadorActual.Monedas + "," + JugadorActual.Armadura + "," + JugadorActual.Pociones + "," + JugadorActual.PoderDelArma + "," + JugadorActual.Mods + "," + JugadorActual.Exp);
+                    if (File.Exists(NombreDePartida))
+                    {
+                        File.Delete(NombreDePartida);
+                    }
+                    using (StreamWriter sw = File.CreateText(NombreDePartida))
+                    {
+                        sw.WriteLine(Datos);
+                    }
+
                     Console.WriteLine("Los datos han sido guardados");
+                    
+                    Console.ReadKey();
                 }else if(input == "s"|| input == "salir")
                 {
                     Console.WriteLine("Hasta luego!");
