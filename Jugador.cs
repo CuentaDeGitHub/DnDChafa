@@ -65,12 +65,11 @@ namespace DnDChafa
             get { return mods; }
             set { mods = value; }
         }
-        public Jugador (string nombre,int vida,int monedas,int daño, int armadura, int pociones,int poderDelArma,int mods)
+        public Jugador (string nombre,int vida,int monedas, int armadura, int pociones,int poderDelArma,int mods)
         {
             this.nombre = nombre;
             this.vida = vida;
             this.monedas = monedas;
-            this.daño = daño;
             this.armadura = armadura;
             this.pociones = pociones;
             this.poderDelArma = poderDelArma;

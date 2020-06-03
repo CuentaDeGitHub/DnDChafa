@@ -161,7 +161,7 @@ namespace DnDChafa
                             Console.WriteLine("Fuga");
                             Console.ReadKey();
                             Console.Clear();
-                            Tiendita.CargarTienda(Program.JugadorActual);
+                            
                             return;
                         }
 

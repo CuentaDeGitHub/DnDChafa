@@ -8,42 +8,99 @@ namespace DnDChafa
 {
     class Program
     {
-        public static Jugador JugadorActual = new Jugador("",10,100,1,0,5,1,0);
+        public static Jugador JugadorActual;
         public static bool loopPrincipal = true;
+        public static int PartidaNueva;
+        public static Historia Historiador;
         static void Main(string[] args)
         {
-            Comenzar();
-            Encuentros.PrimerEncuentro(JugadorActual);
+             MenuPrincipal();
+            Console.WriteLine(JugadorActual.Pociones);
+            Console.ReadKey();
+            Loop(loopPrincipal);
+            
+        }
+        static void Loop(bool LoopPrincipal)
+        {
             while (loopPrincipal)
             {
-                Encuentros.EncuentroAleatorio(JugadorActual);
+                Console.Clear();
+                Console.WriteLine("*==========================*");
+                Console.WriteLine("| (E)xplorar    (T)ienda   |");
+                Console.WriteLine("| (G)uardar     (S)alir    |");
+                Console.WriteLine("*==========================*");
+                string input = Console.ReadLine();
+                input = input.ToLower();
+                if (input == "e" || input == "explorar")
+                {
+                    Encuentros.EncuentroAleatorio(JugadorActual);
+                }else if (input == "t" || input == "tienda")
+                {
+                    Tiendita.AbrirTienda(JugadorActual);
+                }else if(input == "g" || input == "guardar")
+                {
+                    Console.WriteLine("Los datos han sido guardados");
+                }else if(input == "s"|| input == "salir")
+                {
+                    Console.WriteLine("Hasta luego!");
+                    Environment.Exit(0);
+
+                }
+
+
+
             }
         }
-        static void Comenzar()
+        static void MenuPrincipal()
         {
-            Console.WriteLine("Bienvenido a la mazmorra");
-            Console.WriteLine("Nombre del personaje:");
-            JugadorActual.Nombre = Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine("Despiertas en un cuarto oscuro, te sientes mareado y tienes problemas recordando cosas sobre tu pasado");
-
-            if (JugadorActual.Nombre == "")
-            {
-                Console.WriteLine("No recuerdas ni tu propio nombre");
-            }
-            else
-            {
-                Console.WriteLine("Sabes que tu nombre es " + JugadorActual.Nombre);
-            }
-            Console.ReadKey();
-            Console.Clear();
-            Console.WriteLine("Deambulas en la oscuridad sin rumbo, hasta que encuentras una manecilla de puerta");
-            Console.WriteLine("Al intentar abrirla puedes sentir un poco de resistencia, eventualmente el candado oxidado se rompe sin mucho problema");
-            Console.WriteLine("Puedes ver a tu captor dandote la espalda mas alla de la puerta");
-            Console.ReadKey();
-
-
-        }
             
+            Console.Clear();
+            Console.WriteLine("Bienvenido!");
+            Console.WriteLine();
+            Console.WriteLine("*====================================*");
+            Console.WriteLine("|                                    |");
+            Console.WriteLine("| (N)ueva partida   (C)argar partida |");
+            Console.WriteLine("|                                    |");
+            Console.WriteLine("*====================================*");
+            string input = Console.ReadLine();
+            input = input.ToLower();
+            if (input == "n" || input == "nueva partida")
+            {
+                PartidaNueva = 0;
+            }
+            else if (input == "c" || input == "cargar partida")
+            {
+                Console.Clear();
+                Console.WriteLine("Para continuar con una partida, requieres un documento de texto en tu escritorio llamado -Partida.txt");
+                Console.WriteLine("Si usted tiene tal documento presio Y para continuar");
+                Console.WriteLine("De lo contrario presione cualquier tecla para volver");
+                string inputCargar = Console.ReadLine();
+                if (inputCargar == "Y" || inputCargar == "y")
+                {
+                    //Leer archivo
+                    //Iniciar Loop principal
+                    PartidaNueva = 1;
+                }
+                else
+                {
+                    PartidaNueva = 2;
+
+                }
+            }
+            switch (PartidaNueva)
+            {
+                case 0:
+                    JugadorActual = new Jugador("", 10, 100, 0, 5, 1, 0);
+
+                    break;
+                case 1:
+                    JugadorActual = new Jugador("", 10, 500, 0, 25, 1, 0);
+                    break;
+                case 2:
+                    MenuPrincipal();
+                    break;
+            }
+
+        }    
     }
 }

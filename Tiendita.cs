@@ -9,11 +9,7 @@ namespace DnDChafa
     public class Tiendita
     {
       
-        public static void CargarTienda(Jugador p)
-        {
- 
-            AbrirTienda(p);
-        }
+    
         public static void AbrirTienda(Jugador p)
         {
             int pocionPrecio;
@@ -64,10 +60,7 @@ namespace DnDChafa
                 {
                     return;
                 }
-                    
-                
             }
-            
         }
         static void Comprar(string objeto,int costo,Jugador p)
         {
