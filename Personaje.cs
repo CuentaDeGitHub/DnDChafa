@@ -13,7 +13,6 @@ namespace DnDChafa
         protected int vida;
         protected int armadura;
         protected int poderDelArma;
-        protected int destreza;
         #endregion
         #region Propiedades
         public string Nombre
@@ -36,28 +35,19 @@ namespace DnDChafa
             get { return poderDelArma; }
             set { poderDelArma = value; }
         }
-        public int Destreza
-        {
-            get { return destreza; }
-            set { destreza = value; }
-        }
+        
         #endregion
         #region Constructor
-        public Personaje()
+        public Personaje() 
         {
             Nombre = "";
             Vida = 0;
             Armadura = 0;
             PoderDelArma = 0;
-            Destreza = 0;
         }
         #endregion
         #region Metodos
-        static int Atacar()
-        {
-            Console.WriteLine("Atacar");
-            return 1;
-        }
+        public abstract int Atacar();
         #endregion
 
 

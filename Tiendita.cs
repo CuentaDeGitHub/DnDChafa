@@ -15,6 +15,7 @@ namespace DnDChafa
     /// <param name="p">Objeto del personaje, los precios son calculados en base a las mejoras que tengas</param>
         public static void AbrirTienda(Jugador p)
         {
+            Console.Clear();
             int pocionPrecio;
             int armaduraPrecio;
             int armaPrecio;
@@ -28,26 +29,27 @@ namespace DnDChafa
 
                 Console.WriteLine("       Tiendia de abarrotes   ");
                 Console.WriteLine("*============================*");
-                Console.WriteLine(" (E)spada          $" + armaPrecio +"   |");
+                Console.WriteLine(" (R)eforzar arma   $" + armaPrecio +"   |");
                 Console.WriteLine(" (A)rmadura        $" + armaduraPrecio + "   |");
-                Console.WriteLine(" (M)odificador     $" + difP + "   |");
                 Console.WriteLine(" (P)ociones        $" + pocionPrecio + "    |");
-                Console.WriteLine(" (S)alir            ");
+                Console.WriteLine(" (S)alir                      ");
                 Console.WriteLine("*============================*");
                 Console.WriteLine("");
                 Console.WriteLine("");
                 Console.WriteLine("   Estadisticas del jugador   ");
+                Console.WriteLine("");
+                Console.WriteLine("Dinero del jugador " + p.Monedas);
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("*============================*");
                 Console.WriteLine("| Salud :              " + p.Vida );
                 Console.WriteLine("| Poder del arma :     " + p.PoderDelArma);
                 Console.WriteLine("| Valor de armadura :  " + p.Armadura);
                 Console.WriteLine("| Pociones :           " + p.Pociones);
-                Console.WriteLine("| Monedas :            " + p.Monedas);
-                Console.WriteLine("| Modificadores :      " + p.Mods);
                 Console.WriteLine("*============================*");
                 string input = Console.ReadLine();
                 input = input.ToLower();
-                if (input == "e" || input == "espada") 
+                if (input == "r" || input == "reforzar") 
                 {
                     Comprar("arma", armaPrecio, p);
                 }else if (input == "a" || input == "armadura")
@@ -56,9 +58,6 @@ namespace DnDChafa
                 }else if (input == "p" || input == "pociones")
                 {
                     Comprar("pocion", pocionPrecio, p);
-                }else if (input == "m" || input == "modificador")
-                {
-                    Comprar("modificador", difP, p);
                 }else if(input == "s"|| input == "salir")
                 {
                     Console.WriteLine("Vuelva pronto!");
@@ -88,9 +87,6 @@ namespace DnDChafa
                     case "arma":
                         p.PoderDelArma++;
                             break;
-                    case "modificador":
-                        p.Mods++;
-                            break;
                 }
                 p.Monedas -= costo;
     
@@ -99,7 +95,6 @@ namespace DnDChafa
             {
                 Console.WriteLine("Parece que no tienes dinero suficiente");
                 Console.ReadKey();
-                
             }
             Console.Clear();
         }

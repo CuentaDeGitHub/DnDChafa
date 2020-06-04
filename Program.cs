@@ -53,16 +53,8 @@ namespace DnDChafa
                 }else if(input == "g" || input == "guardar")
                 {
                     //Nombre,Vida,Monedas,Armadura,Pociones,PoderDelArma,Mods,Exp
-                    string Datos = (JugadorActual.Nombre + "," + JugadorActual.Vida + "," + JugadorActual.Monedas + "," + JugadorActual.Armadura + "," + JugadorActual.Pociones + "," + JugadorActual.PoderDelArma + "," + JugadorActual.Mods + "," + JugadorActual.Exp);
-                    if (File.Exists(NombreDePartida))
-                    {
-                        File.Delete(NombreDePartida);
-                    }
-                    using (StreamWriter sw = File.CreateText(NombreDePartida))
-                    {
-                        sw.WriteLine(Datos);
-                    }
-
+                    string Datos = (JugadorActual.Nombre + "," + JugadorActual.Vida + "," + JugadorActual.Monedas + "," + JugadorActual.Armadura + "," + JugadorActual.Pociones + "," + JugadorActual.PoderDelArma + "," + JugadorActual.Exp);
+                    Historia.Guardar(NombreDePartida, Datos);
                     Console.WriteLine("Los datos han sido guardados");
                     
                     Console.ReadKey();
@@ -108,8 +100,7 @@ namespace DnDChafa
                 string inputCargar = Console.ReadLine();
                 if (inputCargar == "Y" || inputCargar == "y")
                 {
-                    //Leer archivo
-                    //Iniciar Loop principal
+                    
                     PartidaNueva = 1;
                 }
                 else
@@ -122,12 +113,14 @@ namespace DnDChafa
             {
                 case 0:
                     //Nuevo personaje
-                    JugadorActual = new Jugador("", 10, 100, 0, 5, 1, 0,0);
+                    JugadorActual = new Jugador("", 10, 100, 0, 5, 1,0);
 
                     break;
                 case 1:
                     //Cargar personaje
-                    JugadorActual = new Jugador("", 10, 500, 0, 25, 1, 0,1);
+                    String Linea = File.ReadAllText(NombreDePartida);
+                    String[] Datos = Linea.Split(',');
+                    JugadorActual = new Jugador(Datos[0], int.Parse(Datos[1]), int.Parse(Datos[2]), int.Parse(Datos[3]), int.Parse(Datos[4]), int.Parse(Datos[5]), int.Parse(Datos[6]));
                     break;
                 case 2:
                     MenuPrincipal();
