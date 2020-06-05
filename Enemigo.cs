@@ -9,13 +9,17 @@ namespace DnDChafa
     class Enemigo : Personaje
 
     {
+        Random r = new Random();
         public Enemigo() : base()
         {
-
+            Nombre = "El hombre desesperado";
+            Vida = 40;
+            Armadura = 0;
+            PoderDelArma = 4;
         }
-        public override int Atacar()
+        public override void Victoria()
         {
-            return 0;
+            Console.WriteLine("Perdoname, pero creo que tu entiendes mi situacion");
         }
     }
 }

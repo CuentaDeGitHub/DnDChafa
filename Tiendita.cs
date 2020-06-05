@@ -38,7 +38,7 @@ namespace DnDChafa
                 Console.WriteLine("");
                 Console.WriteLine("   Estadisticas del jugador   ");
                 Console.WriteLine("");
-                Console.WriteLine("Dinero del jugador " + p.Monedas);
+                Console.WriteLine("     Dinero del jugador " + p.Monedas);
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("*============================*");

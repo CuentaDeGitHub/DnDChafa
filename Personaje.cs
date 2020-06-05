@@ -47,7 +47,8 @@ namespace DnDChafa
         }
         #endregion
         #region Metodos
-        public abstract int Atacar();
+        
+        public abstract void Victoria();
         #endregion
 
 

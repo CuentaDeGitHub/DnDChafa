@@ -43,10 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CajaBuena.cs" />
+    <Compile Include="CajaMalosa.cs" />
     <Compile Include="Combate.cs" />
     <Compile Include="Encuentros.cs" />
     <Compile Include="Enemigo.cs" />
     <Compile Include="Historia.cs" />
+    <Compile Include="ICajita.cs" />
     <Compile Include="Jugador.cs" />
     <Compile Include="Personaje.cs" />
     <Compile Include="Program.cs" />

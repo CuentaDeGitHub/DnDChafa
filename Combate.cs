@@ -18,7 +18,7 @@ namespace DnDChafa
             int dañoInfligido;
             if (random)
             {
-                n = "";
+                n = Encuentros.ObtenerEnemigo();
                 d = p.ObtenerFuerza(p);
                 v = p.ObtenerVida(p);
             }
@@ -46,13 +46,14 @@ namespace DnDChafa
                     case "atacar":
                         //Atacar. Atacas con toda tu fuerza, infligiendo mucho daño, pero recibiendo mucho daño tambien
                         Console.WriteLine("Sin cuidado alguno cortas con tu espada, en la direccion de tu oponente, el " + n + " logra atacarte tambien");
-                        dañoRecibido = r.Next(d - 1, d + 1) - p.Armadura;
+                        dañoRecibido = r.Next(d , d + 2) - p.Armadura;
                         if (dañoRecibido < 0)
                         {
                             dañoRecibido = 0;
                         }
-                        dañoInfligido = r.Next(0, p.PoderDelArma) + r.Next(1, 4);
-                        Console.WriteLine("Pierdes " + dañoRecibido + " puntos de vida, e infliges " + dañoInfligido + " puntos de daño al enemigo");
+                        dañoInfligido = p.Atacar();
+                        Console.WriteLine();
+                        Console.WriteLine("Pierdes " + dañoRecibido + " punto(s) de vida, e infliges " + dañoInfligido + " punto(s) de daño al enemigo");
                         p.Vida -= dañoRecibido;
                         v -= dañoInfligido;
                         Console.ReadKey();
@@ -62,13 +63,13 @@ namespace DnDChafa
                     case "defender":
                         //Defender. Te enfocas en defender, recibes daño disminuido, pero infliges poco daño
                         Console.WriteLine("Mientras que el " + n + " se prepara para atacar, adoptas una postura defensiva ");
-                        dañoRecibido = (d - 2) - p.Armadura;
+                        dañoRecibido = (d - 1) - p.Armadura;
                         if (dañoRecibido < 0)
                         {
                             dañoRecibido = 0;
                         }
-                        dañoInfligido = r.Next(0, p.PoderDelArma) + r.Next(1, 2);
-                        Console.WriteLine("Pierdes " + dañoRecibido + " puntos de vida, e infliges " + dañoInfligido + " puntos de daño al enemigo");
+                        dañoInfligido = (p.Atacar() - 1);
+                        Console.WriteLine("Pierdes " + dañoRecibido + " punto(s) de vida, e infliges " + dañoInfligido + " punto(s) de daño al enemigo");
                         p.Vida -= dañoRecibido;
                         v -= dañoInfligido;
                         Console.ReadKey();
@@ -85,7 +86,7 @@ namespace DnDChafa
                             {
                                 dañoRecibido = 0;
                             }
-                            Console.WriteLine("Recibes " + dañoRecibido + " puntos de daño y no logras escapar");
+                            Console.WriteLine("Recibes " + dañoRecibido + " punto(s) de daño y no logras escapar");
                             p.Vida -= dañoRecibido;
                             Console.ReadKey();
                         }
@@ -111,7 +112,7 @@ namespace DnDChafa
                             {
                                 dañoRecibido = 0;
                             }
-                            Console.WriteLine("Recibes " + dañoRecibido + " puntos de daño");
+                            Console.WriteLine("Recibes " + dañoRecibido + " punto(s) de daño");
                             p.Vida -= dañoRecibido;
                             Console.ReadKey();
 
@@ -119,7 +120,7 @@ namespace DnDChafa
                         else
                         {
                             Console.WriteLine("Usas tu pocion de curacion");
-                            int pocionPotencia = 5;
+                            int pocionPotencia = 5 *(p.Mods + 1);
                             Console.WriteLine("Recuperas " + pocionPotencia + " puntos de vida");
                             p.Vida += pocionPotencia;
                             p.Pociones -= 1;
@@ -129,7 +130,7 @@ namespace DnDChafa
                             {
                                 dañoRecibido = 0;
                             }
-                            Console.WriteLine("Recibes " + dañoRecibido + " puntos de daño");
+                            Console.WriteLine("Recibes " + dañoRecibido + " punto(s) de daño");
                             p.Vida -= dañoRecibido;
                             Console.ReadKey();
                         }
@@ -150,6 +151,7 @@ namespace DnDChafa
             Console.Clear();
             Console.WriteLine("Has derrotado al " + n);
             Console.WriteLine("Obtienes " + oro + " monedas de oro ");
+            p.Victoria();
             p.Monedas += oro;
             p.Exp = p.Exp + 1;
             Console.ReadKey();

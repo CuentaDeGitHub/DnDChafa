@@ -20,7 +20,9 @@ namespace DnDChafa
              MenuPrincipal();
 
             if (JugadorActual.Exp == 0){
-                Historia.HistoriaPrincipio(JugadorActual);
+                JugadorActual.Nombre = Historia.PregunarNombre();
+                Historia.HistoriaPrincipio(JugadorActual.Nombre);
+                Encuentros.PrimerEncuentro(JugadorActual);
             }
             Loop(loopPrincipal);
             
@@ -37,6 +39,7 @@ namespace DnDChafa
         {
             while (loopPrincipal)
             {
+                
                 Console.Clear();
                 Console.WriteLine("*==========================*");
                 Console.WriteLine("| (E)xplorar    (T)ienda   |");
@@ -46,14 +49,52 @@ namespace DnDChafa
                 input = input.ToLower();
                 if (input == "e" || input == "explorar")
                 {
-                    Encuentros.EncuentroAleatorio(JugadorActual);
+                    if(JugadorActual.Exp == 8)
+                    {
+                        Historia.HistoriaDesarrollo();
+                        JugadorActual.Mods++;
+                        JugadorActual.Pociones += 5;
+                        JugadorActual.Exp++;
+                    }else if(JugadorActual.Exp == 14)
+                    {
+                        //Historia.HistoriaFinal();
+                        Enemigo EnemigoFinal = new Enemigo();
+                        Combate.Pelea(false, EnemigoFinal.Nombre, EnemigoFinal.PoderDelArma, EnemigoFinal.Vida, JugadorActual);
+                        Console.Clear();
+                        if(JugadorActual.Exp == 14)
+                        {
+                            Console.WriteLine("Mientras el hombre te golpea, puedes escuchar como dice");
+                            EnemigoFinal.Victoria();
+                            Console.WriteLine();
+                            Console.WriteLine("No pudiste vencerlo...");
+                            Console.WriteLine("En tu desesperacion, hiciste lo que mejor sabes hacer.");
+                            Console.WriteLine("Huir y esconderte como un cobarde.");
+                            Console.WriteLine("Este es el fin.....");
+                            Console.ReadKey();
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Historia.Imprimir("Lo has logrado,tu adversario ha muerto.");
+                            Historia.Imprimir("Has conseguido un lugar en esta civilizacion.");
+                            Historia.Imprimir("Civilizacion y paz....");
+                            Console.ReadKey();
+                            Environment.Exit(0);
+                        }
+                        
+                    }
+                    else
+                    {
+                        Encuentros.EncuentroAleatorio(JugadorActual);
+                    }
+                    
                 }else if (input == "t" || input == "tienda")
                 {
                     Tiendita.AbrirTienda(JugadorActual);
                 }else if(input == "g" || input == "guardar")
                 {
                     //Nombre,Vida,Monedas,Armadura,Pociones,PoderDelArma,Mods,Exp
-                    string Datos = (JugadorActual.Nombre + "," + JugadorActual.Vida + "," + JugadorActual.Monedas + "," + JugadorActual.Armadura + "," + JugadorActual.Pociones + "," + JugadorActual.PoderDelArma + "," + JugadorActual.Exp);
+                    string Datos = (JugadorActual.Nombre + "," + JugadorActual.Vida + "," + JugadorActual.Monedas + "," + JugadorActual.Armadura + "," + JugadorActual.Pociones + "," + JugadorActual.PoderDelArma + "," + JugadorActual.Mods + "," +JugadorActual.Exp);
                     Historia.Guardar(NombreDePartida, Datos);
                     Console.WriteLine("Los datos han sido guardados");
                     
@@ -113,14 +154,14 @@ namespace DnDChafa
             {
                 case 0:
                     //Nuevo personaje
-                    JugadorActual = new Jugador("", 10, 100, 0, 5, 1,0);
+                    JugadorActual = new Jugador("", 10, 100, 0, 5, 1,0,0);
 
                     break;
                 case 1:
                     //Cargar personaje
                     String Linea = File.ReadAllText(NombreDePartida);
                     String[] Datos = Linea.Split(',');
-                    JugadorActual = new Jugador(Datos[0], int.Parse(Datos[1]), int.Parse(Datos[2]), int.Parse(Datos[3]), int.Parse(Datos[4]), int.Parse(Datos[5]), int.Parse(Datos[6]));
+                    JugadorActual = new Jugador(Datos[0], int.Parse(Datos[1]), int.Parse(Datos[2]), int.Parse(Datos[3]), int.Parse(Datos[4]), int.Parse(Datos[5]), int.Parse(Datos[6]),int.Parse(Datos[7]));
                     break;
                 case 2:
                     MenuPrincipal();
